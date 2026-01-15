@@ -1,0 +1,182 @@
+/* Základní reset */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  overflow-x: hidden;
+  position: relative;
+  height: 100%; 
+}
+
+/* Černý blok nahoře */
+.cernyblok {
+  width: 100%;
+  height: 200px;
+  background-color: black;
+  position: relative; /* rodič pro absolutně pozicovaná tlačítka */
+  z-index: 10;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Klikatelné obrázky (tlačítka) */
+.tlacitka {
+  position: absolute;       /* absolutně uvnitř .cernyblok */
+  top: 50%;                 /* vertikální střed černého bloku */
+  left: 50%;
+  transform: translate(-50%, -50%); /* střed horizontálně i vertikálně */
+  display: flex;
+  justify-content: center;
+  gap: 5%;                  /* mezera mezi tlačítky v % pro responsivitu */
+  width: 100%;
+  max-width: 2000px;
+  z-index: 1000;
+  margin: 0;
+}
+
+.tlacitka a {
+  display: block;
+  flex: 1 1 100px;     /* zmenšování a zvětšování proporčně */
+  max-width: 140px;    /* maximální velikost tlačítka */
+  border-radius: 50%;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tlacitka a img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.tlacitka a:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(255,255,255,0.25);
+}
+/* Textový blok */
+.text {
+  max-width: 46%;
+  padding: 0 30px 30px 30px;
+  margin: 0 auto 50px auto;
+  position: relative;
+  top: 50px;
+  text-align: center;
+  line-height: 1.55;
+  z-index: 1; /* tady žádný z-index! */
+}
+
+.text h1, .text h2 {
+  margin: 0 0 20px 0;  /* mezera pod nadpisem */
+}
+
+.text p {
+  font-size: 25px;
+  margin: 0 0 20px 0;  /* mezera mezi odstavci */
+}
+
+/* Responzivní drobnosti */
+@media (max-width: 520px) {
+  .obrazek {
+    width: 220px;
+    height: 220px;
+    margin: -110px auto 0 auto;
+  }
+
+  .tlacitka a {
+    width: 120px;
+    height: 120px;
+  }
+
+  .tlacitka {
+    gap: 14px;
+  }
+}
+
+.cara {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0px;      /* nastav si pozici */
+  width: 16px;
+  background-color: black;
+}
+
+
+.cara3 {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right:0;      /* nastav si pozici */
+  width: 16px;
+  background-color: black;
+}
+.cara4 {
+  position: fixed;     /* vždy dole na obrazovce */
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 80px;
+  background-color: black;
+  display: flex;       /* aktivuje flexbox */
+  justify-content: center; /* centrování horizontálně */
+  align-items: center;     /* centrování vertikálně */
+  z-index: 5;
+}
+
+.kontakty {
+  display: flex;
+  justify-content: center; /* vycentruje všechny údaje */
+  gap: 50px;               /* velikost mezery mezi položkami */
+  color: white;
+  font-size: 18px;
+  align-items: center;     /* vertikální centrování */
+  line-height: 1;
+}
+
+.submenu {
+  position: absolute;
+  top: calc(100% + 10px);   /* mezera pod tlačítkem */
+  left: 50%;
+  transform: translateX(-50%);
+  background: black;
+  border: 4px solid gray;   /* bílý/šedý okraj */
+  border-radius: 12px;
+  padding: 10px 30px;       /* vertikální a horizontální padding */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+
+  line-height: 2;           /* mezera mezi řádky textu */
+}
+
+.menu {
+  position: relative;   /* důležité pro absolutní submenu */
+  cursor: pointer;
+z-index: 2000; /* vyšší než z-index tlačítek i textu */
+}
+
+.menu:focus-within .submenu {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Styl pro jednotlivé odkazy v menu */
+.submenu a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 8px 0;
+  font-size: 18px;
+  line-height: 1.8;
+  transition: transform 0.2s ease;
+  text-align:center;
+  box-shadow: none !important;  /* zruší dědičný stín */
+}
+
+.submenu a:hover {
+  transform: scale(1.1);         /* mírné zvětšení textu při hoveru */
+  background-color: transparent; /* žádné pozadí */
+  border-radius: 0;              /* žádný ovál */
+  color: white;                  /* barva textu se nemění */
+}
